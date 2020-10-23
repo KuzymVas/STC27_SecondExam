@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Обслуживает запросы, связанные с пользователями
+ */
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -22,6 +25,10 @@ public class UserController {
         this.service = service;
     }
 
+    /**
+     * Обслуживает запрос регистрации нового пользователя
+     * @param dto - данные для регистрации
+     */
     @PostMapping("/register")
     public void register(@RequestBody RegistrationDTO dto) {
         logger.debug("New registration request: " + dto.toString());

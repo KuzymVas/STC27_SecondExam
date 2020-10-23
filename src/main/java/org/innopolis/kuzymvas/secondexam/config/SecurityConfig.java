@@ -12,6 +12,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
+/**
+ * Конфигурация Spring Security
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -30,11 +33,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.provider = provider;
     }
 
+    /**
+     * Настраиваем менеджер аунтетификации на использование нашего провайдера
+     * @param auth - построитель для менеджера
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(provider);
     }
 
+    /**
+     * Настраиваем HTTP аутентификацию и авторизацию
+     * @param http - настройки http безопасности
+     * @throws Exception - при ошибках настройки
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http

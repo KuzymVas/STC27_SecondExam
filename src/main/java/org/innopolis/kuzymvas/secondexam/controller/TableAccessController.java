@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Реализует требуемый функционал возврата содержимого таблиц целиком и построчно через REST
+ */
 @RestController
 @RequestMapping("/tables")
 public class TableAccessController {
@@ -29,12 +32,21 @@ public class TableAccessController {
         this.reportService = reportService;
     }
 
+    /**
+     * Обрабатывает запрос на вывод таблицы пользователей целиком
+     * @return - все строки таблицы пользователей
+     */
     @GetMapping("/users")
     public List<UserDAO> getAllUsersRows() {
         logger.debug("New request for all users.");
         return userService.getAllRows();
     }
 
+    /**
+     * Обрабатывает запрос на вывод таблицы пользователей построчно
+     * @param id - идентификатор запрашиваемой строки
+     * @return - запрошенная строка таблицы
+     */
     @GetMapping("/users/{id}")
     public UserDAO getSingleUserRow(@PathVariable(value="id") final String id) {
 
@@ -48,12 +60,21 @@ public class TableAccessController {
         return userService.getSingleRow(parsedID);
     }
 
+    /**
+     * Обрабатывает запрос на вывод таблицы отчетов целиком
+     * @return - все строки таблицы отчетов
+     */
     @GetMapping("/reports")
     public List<ReportDAO> getAllReportsRows() {
         logger.debug("New request for all users.");
         return reportService.getAllRows();
     }
 
+    /**
+     * Обрабатывает запрос на вывод таблицы отчетов построчно
+     * @param id - идентификатор запрашиваемой строки
+     * @return - запрошенная строка таблицы
+     */
     @GetMapping("/reports/{id}")
     public ReportDAO getSingleReportRow(@PathVariable(value="id") final String id) {
 

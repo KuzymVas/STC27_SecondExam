@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Данные для регистрации нового пользователя, полученные из JSON: имя, пароль и его подтверждение.
+ */
 @Getter
 @Setter
 @NoArgsConstructor

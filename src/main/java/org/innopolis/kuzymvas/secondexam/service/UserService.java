@@ -15,6 +15,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Сервис пользователей: предоставляет возможности регистрации и вывода содержимого таблицы пользователей
+ */
 @Service
 public class UserService {
 
@@ -30,6 +33,11 @@ public class UserService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    /**
+     *  Регистрирует нового пользователя
+     *
+     * @param dto - данные для регистрации: имя, пароль и его подтверждение
+     */
     public void register(RegistrationDTO dto) {
         if (!dto.getPassword().equals(dto.getPasswordConfirmation())) {
             throw new IllegalArgumentException("Can't register. Passwords mismatch");
@@ -44,7 +52,10 @@ public class UserService {
         repository.save(newUser);
     }
 
-
+    /**
+     * Получает доступ ко всем строкам таблицы пользователей через JDBC
+     * @return - все строки таблицы пользователей
+     */
     public List<UserDAO> getAllRows() {
         final List<Map<String, Object>> rows = jdbcTemplate.queryForList("SELECT * FROM users");
         final List<UserDAO> daos = new ArrayList<>();
@@ -54,6 +65,11 @@ public class UserService {
         return daos;
     }
 
+    /**
+     *  Получает доступ к одной строке таблицы пользователей через JDBC
+     * @param id - идентификатор строки
+     * @return - строку таблицы пользователей
+     */
     public UserDAO getSingleRow(Integer id) {
         final Map<String, Object> row = DataAccessUtils.singleResult(
                 jdbcTemplate.queryForList("SELECT * FROM users WHERE id = ?", id));
@@ -63,6 +79,11 @@ public class UserService {
         return parseRow(row);
     }
 
+    /**
+     * Преобразует таблицу, возвращаемую JDBC в объект описания пользователя
+     * @param row - Таблица (map), возвращаемая JDBC
+     * @return - описание пользователя
+     */
     private UserDAO parseRow(Map<String, Object> row) {
         final UserDAO dao = new UserDAO();
         dao.setId((Integer) row.get("id"));

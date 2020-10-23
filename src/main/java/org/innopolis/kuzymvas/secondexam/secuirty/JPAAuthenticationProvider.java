@@ -17,6 +17,9 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 import java.util.Optional;
 
+/**
+ * Провайдер, обеспечивающий аутентификацию из БД по логину и паролю
+ */
 @Component
 public class JPAAuthenticationProvider implements AuthenticationProvider {
 

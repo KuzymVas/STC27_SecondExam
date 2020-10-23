@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import java.sql.Date;
 
+/**
+ *  Описание строки таблицы отчетов
+ */
 @NoArgsConstructor
 @Getter
 @Setter

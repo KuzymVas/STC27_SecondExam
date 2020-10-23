@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * Описание строки таблицы пользователей. Связано с таблицей через аннотации JPA
+ */
 @Getter
 @Setter
 @Entity
